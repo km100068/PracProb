@@ -4,7 +4,7 @@ Problem workshop project
 ## Program modules
 
 ### Data extractor
-Extracts data from `LinuxCommitData.cvs` from `data` folder.
+Extracts data from `LinuxCommitData.cvs` from `data` folder as a list of `User` objects.
 
 #### Types
 ```

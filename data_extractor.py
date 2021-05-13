@@ -1,11 +1,14 @@
 from typing import List, TypedDict
 import csv
 
-from datetime import date as Date
+import numpy
+import numpy as np
+
+from datetime import datetime, timezone
 
 
 class User(TypedDict):
-    date: Date
+    date: datetime
     commits: int
     additions: int
     deletions: int
@@ -20,7 +23,7 @@ def get_data() -> List[User]:
 
         for row in reader:
             date_details = list(map(int, row[0].split(' ')[0].split('/')))
-            date = Date(date_details[2], date_details[0], date_details[1])
+            date = datetime(date_details[2], date_details[0], date_details[1])
 
             res.append({
                 'date': date,
@@ -33,6 +36,22 @@ def get_data() -> List[User]:
         return res
 
 
+def get_data_as_numpy_arrays() -> List[numpy.longlong]:
+    return list(
+        map(lambda item: numpy.longlong([
+            item['id'],
+            item['date'].timestamp(),
+            item['commits'],
+            item['additions'],
+            item['deletions']
+        ]), get_data()))
+
+
 if __name__ == '__main__':
     for rec in get_data():
+        print(rec)
+
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+    for rec in get_data_as_numpy_arrays():
         print(rec)

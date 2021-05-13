@@ -4,7 +4,7 @@ Problem workshop project
 ## Program modules
 
 ### Data extractor
-Extracts data from `LinuxCommitData.cvs` from `data` folder as a list of `User` objects.
+Extracts data from `LinuxCommitData.cvs` situated in `data` folder.
 
 #### Types
 ```
@@ -18,5 +18,7 @@ User extends typing.TypedDict
 
 
 #### Functions
-`getdata: List[User]`
+`get_data: List[User]` - extracts data as a list of `User` objects
+
+`get_data_as_numpy_arrays() -> List[numpy.longlong]` - extract data as numpy arrays of `longlong` type 
 

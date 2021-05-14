@@ -1,10 +1,8 @@
-from typing import List, TypedDict
 import csv
+from datetime import datetime
+from typing import List, TypedDict
 
 import numpy
-import numpy as np
-
-from datetime import datetime, timezone
 
 """
 Typed dictionary for row representation as a user

@@ -57,11 +57,11 @@ def get_data_as_numpy_arrays() -> List[numpy.longlong]:
         for row in reader:
             date_details = list(map(int, row[0].split(' ')[0].split('/')))
             res.append(numpy.longlong([
-                row[4],
-                datetime(date_details[2], date_details[0], date_details[1]).timestamp(),
-                row[1],
-                row[2],
-                row[3]
+                row[4],  # id
+                datetime(date_details[2], date_details[0], date_details[1]).timestamp(),  # timestamp
+                row[1],  # commits
+                row[2],  # additions
+                row[3]   # deletions
             ]))
 
         return res

@@ -6,6 +6,10 @@ import numpy as np
 
 from datetime import datetime, timezone
 
+"""
+Typed dictionary for row representation as a user
+"""
+
 
 class User(TypedDict):
     date: datetime
@@ -13,6 +17,11 @@ class User(TypedDict):
     additions: int
     deletions: int
     id: int
+
+
+"""
+Extracts data as a list of User objects
+"""
 
 
 def get_data() -> List[User]:
@@ -36,15 +45,28 @@ def get_data() -> List[User]:
         return res
 
 
+"""
+Extracts data as a list of numpy.longlong arrays
+"""
+
+
 def get_data_as_numpy_arrays() -> List[numpy.longlong]:
-    return list(
-        map(lambda item: numpy.longlong([
-            item['id'],
-            item['date'].timestamp(),
-            item['commits'],
-            item['additions'],
-            item['deletions']
-        ]), get_data()))
+    with open('./data/LinuxCommitData.csv', 'r') as f:
+        reader = csv.reader(f)
+
+        res: List[numpy.longlong, ...] = list()
+
+        for row in reader:
+            date_details = list(map(int, row[0].split(' ')[0].split('/')))
+            res.append(numpy.longlong([
+                row[4],
+                datetime(date_details[2], date_details[0], date_details[1]).timestamp(),
+                row[1],
+                row[2],
+                row[3]
+            ]))
+
+        return res
 
 
 if __name__ == '__main__':

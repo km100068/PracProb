@@ -57,7 +57,7 @@ def get_data_as_numpy_arrays() -> List[numpy.longlong]:
 
         for row in reader:
             date_details = list(map(int, row[0].split(' ')[0].split('/')))
-            if 2013 <= date_details[2] <= 2017:
+            if 2013 <= date_details[2] <= 2016:
                 res.append(numpy.longlong([
                     row[4],
                     datetime(date_details[2], date_details[0], date_details[1]).timestamp(),

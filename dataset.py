@@ -17,16 +17,31 @@ class Dataset:
         dataframe = self.get_data_by_user_id(user_id)[['additions', 'deletions']]
         return tuple(dataframe['additions'].sub(dataframe['deletions']))
 
+    def get_add_del_diff_all(self):
+        dataframe = self.dataset[['additions', 'deletions']]
+        return tuple(dataframe['additions'].sub(dataframe['deletions']))
+
     def get_commits_by_user_id(self, user_id: int) -> Tuple[int]:
         return tuple(self.get_data_by_user_id(user_id)['commits'])
+
+    def get_commits_all(self):
+        return tuple(self.dataset['commits'])
 
     def get_adc_coefficient_by_user_id(self, user_id: int) -> Tuple[float]:
         return tuple(
             numpy.array(self.get_add_del_diff_by_user_id(user_id)) / numpy.array(self.get_commits_by_user_id(user_id))
         )
 
+    def get_adc_coefficient_all(self):
+        return tuple(
+            numpy.array(self.get_add_del_diff_all()) / numpy.array(self.get_commits_all())
+        )
+
     def get_date_by_user_id(self, user_id: int) -> Tuple[int]:
         return tuple(self.get_data_by_user_id(user_id)['date'])
+
+    def get_date_all(self):
+        return tuple(self.dataset['date'])
 
 
 if __name__ == "__main__":

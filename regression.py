@@ -24,9 +24,6 @@ if __name__ == "__main__":
 
     plt.scatter(x, y, s=1, c='red')
 
-    print(x[0])
-    print(x[-1])
-
     sample_x = linspace(x[0], x[-1], len(x))
 
     plt.plot(sample_x, regression(sample_x))

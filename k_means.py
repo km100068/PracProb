@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt
 def get_specific_data(dataset, user_id, column):
     result = []
     for row in dataset:
-        if row[0] == user_id:
+         if row[0] == user_id:
             point = [row[1], row[column]]
             result.append(point)
 
@@ -44,12 +44,26 @@ def draw_plot(whitened, mean_dist, centroids):
     w1 = whitened[mean_dist == 1]
     w2 = whitened[mean_dist == 2]
     w3 = whitened[mean_dist == 3]
+    w4 = whitened[mean_dist == 4]
+    w5 = whitened[mean_dist == 5]
+    w6 = whitened[mean_dist == 6]
+    w7 = whitened[mean_dist == 7]
+    w8 = whitened[mean_dist == 8]
+    w9 = whitened[mean_dist == 9]
     plt.plot(w0[:, 0], w0[:, 1], 'o', alpha=0.5, label='cluster 0')
     plt.plot(w1[:, 0], w1[:, 1], 'd', alpha=0.5, label='cluster 1')
     plt.plot(w2[:, 0], w2[:, 1], 's', alpha=0.5, label='cluster 2')
     plt.plot(w3[:, 0], w3[:, 1], 'd', alpha=0.5, label='cluster 3')
+    plt.plot(w4[:, 0], w4[:, 1], 'd', alpha=0.5, label='cluster 4')
+    plt.plot(w5[:, 0], w5[:, 1], 'd', alpha=0.5, label='cluster 5')
+    plt.plot(w6[:, 0], w6[:, 1], 'd', alpha=0.5, label='cluster 6')
+    plt.plot(w7[:, 0], w7[:, 1], 'd', alpha=0.5, label='cluster 7')
+    plt.plot(w8[:, 0], w8[:, 1], 'd', alpha=0.5, label='cluster 8')
+    plt.plot(w9[:, 0], w9[:, 1], 'd', alpha=0.5, label='cluster 9')
     plt.plot(centroids[:, 0], centroids[:, 1], 'k*', label='centroids')
     plt.legend(shadow=True)
+    plt.xlabel('time')
+    plt.ylabel('commits')
     plt.axis('equal')
     # plt.scatter(whitened[:, 0], whitened[:, 1])
     # plt.scatter(centroids[:, 0], centroids[:, 1], c='r')
@@ -61,7 +75,7 @@ if __name__ == '__main__':
     specific = get_specific_data(dataset, 14953, 2)
     #print(specific)
     whitened = whiten(specific)
-    number = 4
+    number = 10
     centroids, mean_dist = kmeans2(whitened, number)
     clusters, dist = vq(whitened, centroids)
     print(clusters)
@@ -71,5 +85,5 @@ if __name__ == '__main__':
     in_1 = list(clusters).count(1)
     in_2 = list(clusters).count(2)
     in_3 = list(clusters).count(3)
-    print(" In 0 cluster: " + str(in_0) + "\n In 1 cluster: " + str(in_1) + " \n In 2 cluster: " + str(in_2) +
-          " \n In 3 cluster: " + str(in_3))
+    print(" In 0 cluster: " + str(in_0) + "\n In 1 cluster: " + str(in_1) + " \n In 2 cluster: " + str(in_2)+
+          " \nIn 3 cluster: " + str(in_3))

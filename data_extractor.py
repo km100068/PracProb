@@ -31,14 +31,15 @@ def get_data() -> List[User]:
         for row in reader:
             date_details = list(map(int, row[0].split(' ')[0].split('/')))
             date = datetime(date_details[2], date_details[0], date_details[1])
+            if 2013 <= date_details[2] <= 2017:
+                res.append({
+                    'date': date,
+                    'commits': int(row[1]),
+                    'additions': int(row[2]),
+                    'deletions': int(row[3]),
+                    'id': int(row[4]),
+                })
 
-            res.append({
-                'date': date,
-                'commits': int(row[1]),
-                'additions': int(row[2]),
-                'deletions': int(row[3]),
-                'id': int(row[4]),
-            })
 
         return res
 
@@ -56,13 +57,15 @@ def get_data_as_numpy_arrays() -> List[numpy.longlong]:
 
         for row in reader:
             date_details = list(map(int, row[0].split(' ')[0].split('/')))
-            res.append(numpy.longlong([
-                row[4],
-                datetime(date_details[2], date_details[0], date_details[1]).timestamp(),
-                row[1],
-                row[2],
-                row[3]
-            ]))
+            if 2013 <= date_details[2] <= 2017:
+                res.append(numpy.longlong([
+                    row[4],
+                    datetime(date_details[2], date_details[0], date_details[1]).timestamp(),
+                    row[1],
+                    row[2],
+                    row[3]
+                ]))
+
 
         return res
 

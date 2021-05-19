@@ -1,13 +1,22 @@
 import csv
 from datetime import datetime
 from typing import List, TypedDict
-
 import numpy
+
+week = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+]
+
 
 """
 Typed dictionary for row representation as a user
 """
-
 
 class User(TypedDict):
     date: datetime
@@ -15,6 +24,7 @@ class User(TypedDict):
     additions: int
     deletions: int
     id: int
+
 
 
 """
@@ -68,10 +78,5 @@ def get_data_as_numpy_arrays() -> List[numpy.longlong]:
 
 
 if __name__ == '__main__':
-    for rec in get_data():
-        print(rec)
-
-    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-
-    for rec in get_data_as_numpy_arrays():
-        print(rec)
+    d = get_data()
+    print(d)
